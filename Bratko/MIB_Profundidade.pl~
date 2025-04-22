@@ -1,0 +1,25 @@
+% Meta interpretador básico com profundidade. (23.2)
+% Basicamente, o que queremos fazer é pegar o MIB anterior e modificar o
+% predicado para ser prove( Goal, DepthLimit), que é verdadeiro somente
+% se DephLimit >= 0.
+
+membro(X, [X|_]).
+membro(X, [_|L]) :- membro(X, L).
+
+
+prove( true, DepthLimit) :- !,
+    DepthLimit >= 0.
+
+prove( clause( Head, Body), DepthLimit) :-
+    DepthLimit >= 0,
+    clause( Head, Body).
+
+prove( ( Goal1, Goal2), DepthLimit) :-
+    DepthLimit1 is DepthLimit - 1,
+    prove( Goal1, DepthLimit1 ),
+    prove( Goal2, DepthLimit1 ).
+
+prove( Goal, DepthLimit) :-
+    clause( Goal, Body),
+    prove(Body, DepthLimit).
+

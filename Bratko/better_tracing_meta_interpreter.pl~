@@ -1,0 +1,99 @@
+% Esse metainterpretador realiza trace de modo mais desejável.
+% Ele é capaz de nos demonstrar as seguintes informações:
+% 1) O Goal/Objetivo a ser executado (Call: Goal)
+% 2) Fazer Trace os Subgoals (com identação).
+% 3) Se o Goal for satisfeito, então sua última instância é mostrada, se
+%    se não, mostra-se que falhou.
+% 4) Nos casos de backtracking a mensagem é Redo.
+
+mytrace( Goal) :-
+    mytrace( Goal, 0).
+
+mytrace( true, _) :- !. % Corte vermelho (?).
+
+mytrace(( Goal1, Goal2), Depth) :- !,
+    mytrace( Goal1, Depth),
+    mytrace( Goal2, Depth).
+
+mytrace(Goal, Depth) :-
+    display('Call: ', Goal, Depth),
+    clause( Goal, Body),
+    Depth1 is Depth + 1,
+    mytrace( Body, Depth1),
+    display( 'Exit: ', Goal, Depth),
+    display_redo( Goal, Depth).
+
+mytrace( Goal, Depth) :-  % Todas as alternativas exauridas.
+    display( 'Fail: ', Goal, Depth),
+    fail.
+
+
+display( Message, Goal, Depth) :-
+    tab( Depth), write( Message), write( Goal), nl.
+
+display_redo( Goal, Depth) :-
+    true  % Primeiro anuncie sucesso.
+    ;
+    display( 'Redo:', Goal, Depth),  % Depois anuncie o backtracking
+    fail.  % Force o backtraking
+
+
+% Testes:
+% -------
+% ?- mytrace(membro(X, [a, b, c])).
+% [debug]  ?- mytrace(membro(X, [a, b, c])).
+% Call: membro(_1346,[a,b,c])
+% Exit: membro(a,[a,b,c])
+% X = a ;
+% Redo:membro(a,[a,b,c])
+%  Call: membro(_1346,[b,c])
+%  Exit: membro(b,[b,c])
+% Exit: membro(b,[a,b,c])
+% X = b ;
+% Redo:membro(b,[a,b,c])
+%  Redo:membro(b,[b,c])
+%   Call: membro(_1346,[c])
+%   Exit: membro(c,[c])
+%  Exit: membro(c,[b,c])
+% Exit: membro(c,[a,b,c])
+% X = c ;
+% Redo:membro(c,[a,b,c])
+%  Redo:membro(c,[b,c])
+%    Redo:membro(c,[c])
+%     Call: membro(_1346,[])
+%     Fail: membro(_1346,[])
+%    Fail: membro(_1346,[c])
+%   Fail: membro(_1346,[b,c])
+%  Fail: membro(_1346,[a,b,c])
+% false.
+% ================================================
+% ?- mytrace((membro(X, [a, b]), membro(X, [b, c]))).
+% Call: membro(_8392,[a,b])
+% Exit: membro(a,[a,b])
+% Call: membro(a,[b,c])
+%  Call: membro(a,[c])
+%   Call: membro(a,[])
+%   Fail: membro(a,[])
+%  Fail: membro(a,[c])
+% Fail: membro(a,[b,c])
+% Redo:membro(a,[a,b])
+%  Call: membro(_8392,[b])
+%  Exit: membro(b,[b])
+% Exit: membro(b,[a,b])
+% Call: membro(b,[b,c])
+% Exit: membro(b,[b,c])
+% X = b ;
+% Redo:membro(b,[b,c])
+%  Call: membro(b,[c])
+%   Call: membro(b,[])
+%   Fail: membro(b,[])
+%  Fail: membro(b,[c])
+% Fail: membro(b,[b,c])
+% Redo:membro(b,[a,b])
+%  Redo:membro(b,[b])
+%   Call: membro(_8392,[])
+%   Fail: membro(_8392,[])
+%  Fail: membro(_8392,[b])
+% Fail: membro(_8392,[a,b])
+% false.
+

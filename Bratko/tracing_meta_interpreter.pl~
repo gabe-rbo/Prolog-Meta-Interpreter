@@ -1,0 +1,21 @@
+% Esse é um metainterpretador prolog que realiza trace.
+
+membro(X, [X|_]).
+membro(X, [_|L]) :- membro(X, L).
+
+
+prove(true) :- !.
+
+prove( (Goal1, Goal2)) :- !,
+    prove( Goal1),
+    prove( Goal2).
+
+prove(Goal) :-
+    write('Call: '), write(Goal), nl,
+    clause(Goal, Body),
+    prove(Body),
+    write('Exit: '), write(Goal), nl.
+
+% Esse metainterpretador tem vários defeitos
+% 1) Não realiza trace de programas retornam false;
+% 2) Não há indicativo de backtracking caso o mesmo Goal é refeito.
