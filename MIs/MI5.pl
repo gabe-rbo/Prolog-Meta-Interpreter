@@ -4,10 +4,10 @@
 mi5(true) :- !.
 mi5([]) :- !. % Para o lado vazio do corte.
 
-mi5(Goal) :-  % Goal n„o pode ser uma tupla, tem que ser um predicado
+mi5(Goal) :-  % Goal n√£o pode ser uma tupla, tem que ser um predicado
     \=(Goal, (_, _)),
     (built_in(Goal) -> call(Goal)
-    ;   clause(Goal, Body), mi4(Body)).
+    ;   clause(Goal, Body), mi5(Body)).
 
 mi5((Goal1, Goals)) :-  % Tupla
     (encontra_cortes((Goal1, Goals), GoalsEsq, GoalsDir) -> mi5(GoalsEsq), !, mi5(GoalsDir)
@@ -18,7 +18,7 @@ built_in(Predicate) :-
     predicate_property(Predicate, built_in).
 
 converte(([]), []).
-converte(A, [A]) :- \=(A, (_, _)).  % A n„o pode ser uma tupla
+converte(A, [A]) :- \=(A, (_, _)).  % A n√£o pode ser uma tupla
 converte((A, B), [A | Bs]) :- !,
     converte(B, Bs).
 
