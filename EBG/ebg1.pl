@@ -1,9 +1,6 @@
 % Este arquivo decida-se à usar dos metainterpretadores completos para
-% criar a EBG completa.
-% Aqui, a EBG será baseada no Livro do Bratko e, como ela por si só é um
-% metainterpretador, irei implementar também o meu metainterpretador
-% completo.
-% Também usaremos de árvores de prova.
+% criar a EBG completa. Aqui, a EBG será baseada no Livro do Bratko e, como ela por si só é um
+% metainterpretador, irei implementar também o meu metainterpretador completo.
 
 ebg1(true, true, true).
 ebg1(!, !, !). 
