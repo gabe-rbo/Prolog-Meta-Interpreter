@@ -9,7 +9,6 @@ ebg1(Goal, GenGoal, GenGoal) :-
     built_in(GenGoal),
     call(Goal).
 
-
 ebg1(Goal, GenGoal, GenGoal) :-  % Será que deve ser mantida?
     not(operational(Goal)),
     built_in(Goal),
