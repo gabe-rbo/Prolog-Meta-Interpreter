@@ -1,4 +1,4 @@
-% Este metainterpretador grava a árvore de prova.
+% Igual a MI7, mas este gera a Ã¡rvore de prova.
 
 mi8(Goal) :- mi8(Goal, Prova), nl, abrir(Prova), nl.
 
