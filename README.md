@@ -8,4 +8,4 @@ There are 3 versions in the MIs folder:
 
 # EBG
 
-Is being worked on. 
+Executes problems with cut and gives most general generalization. It's not yet able of generalizing conditions like not(Predicate) 
