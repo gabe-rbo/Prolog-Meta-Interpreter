@@ -17,8 +17,6 @@ ebg1((Goal1, Goal2), (Gen1, Gen2), Cond) :-
     (encontra_cortes((Goal1, Goal2), GoalsEsq, GoalsDir) -> ebg1(GoalsEsq, GenEsq, CondEsq), !,
                                                             ebg1(GoalsDir, GenDir, CondDir),
                                                             and(CondEsq, CondDir, Cond),
-                                                            %=(Gen, (GenEsq, !, GenDir))
-                                                            %=((Gen1, Gen2), (GenEsq, !, GenDir))
                                                             =((Gen1, Gen2), (GenEsq, GenDir))
     ;   ebg1(Goal1, Gen1, Cond1),
         ebg1(Goal2, Gen2, Cond2),
