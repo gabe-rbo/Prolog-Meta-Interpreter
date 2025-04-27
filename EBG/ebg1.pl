@@ -1,23 +1,24 @@
-% Este arquivo decida-se à usar dos metainterpretadores completos para
-% criar a EBG completa. Aqui, a EBG será baseada no Livro do Bratko e, como ela por si só é um
-% metainterpretador, irei implementar também o meu metainterpretador completo.
+% EBG Completa 
 
 ebg1(true, true, true).
 ebg1(!, !, !). 
 
 ebg1(Goal, GenGoal, GenGoal) :-
+    \=(GenGoal, (_,_)),
     built_in(GenGoal),
     call(Goal).
 
-ebg1(Goal, GenGoal, GenGoal) :-  % Será que deve ser mantida?
-    not(operational(Goal)),
-    built_in(Goal),
-    call(Goal).
+ebg1(Goal, GenGoal, GenGoal) :-
+    \=(GenGoal, (_, _)),
+    not(built_in(Goal)), 
+    clause(Goal, true).  % Equivalente ao operacional do Bratko.
 
 ebg1((Goal1, Goal2), (Gen1, Gen2), Cond) :-
     (encontra_cortes((Goal1, Goal2), GoalsEsq, GoalsDir) -> ebg1(GoalsEsq, GenEsq, CondEsq), !,
                                                             ebg1(GoalsDir, GenDir, CondDir),
                                                             and(CondEsq, CondDir, Cond),
+                                                            %=(Gen, (GenEsq, !, GenDir))
+                                                            %=((Gen1, Gen2), (GenEsq, !, GenDir))
                                                             =((Gen1, Gen2), (GenEsq, GenDir))
     ;   ebg1(Goal1, Gen1, Cond1),
         ebg1(Goal2, Gen2, Cond2),
@@ -26,8 +27,7 @@ ebg1((Goal1, Goal2), (Gen1, Gen2), Cond) :-
 ebg1(Goal, GenGoal, Cond) :-
     \=(Goal, (_, _)),
     not(built_in(Goal)),
-    not(operational(Goal)),
-    clause(GenGoal, GenBody),
+    clause(GenGoal, GenBody), \=(GenBody, true),
     (encontra_cortes(GenBody, GenBodyEsq, GenBodyDir) -> copy_term(GenBodyEsq, BodyEsq),
                                                          copy_term(GenBodyDir, BodyDir),
                                                          ebg1(BodyEsq, GenBodyEsq, CondEsq), !,
@@ -36,7 +36,6 @@ ebg1(Goal, GenGoal, Cond) :-
                                                          and(CondEsq, CondDir, Cond)
      ;   copy_term((GenGoal, GenBody), (Goal, Body)),
          ebg1(Body, GenBody, Cond)).
-         
 
 % Predicados Auxiliares
 and(true, Cond, Cond) :- !.
