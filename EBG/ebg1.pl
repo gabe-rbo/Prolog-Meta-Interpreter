@@ -30,7 +30,7 @@ ebg1(Goal, GenGoal, Cond) :-
                                                          copy_term(GenBodyDir, BodyDir),
                                                          ebg1(BodyEsq, GenBodyEsq, CondEsq), !,
                                                          ebg1(BodyDir, GenBodyDir, CondDir),
-                                                         =(GenGoal, (GenBodyEsq, !, GenBodyDir)),
+                                                         =(GenGoal, (GenBodyEsq, GenBodyDir)),
                                                          and(CondEsq, CondDir, Cond)
      ;   copy_term((GenGoal, GenBody), (Goal, Body)),
          ebg1(Body, GenBody, Cond)).
