@@ -14,7 +14,7 @@ mi7((Goal1, Goals)) :-
     (encontra_cortes((Goal1, Goals), GoalsEsq, GoalsDir) -> mi7(GoalsEsq), !, mi7(GoalsDir)
     ;   mi7(Goal1), mi7(Goals)).
 
-mi7((Goal1; Goals)) :-  % Tupla (ou).
+mi7((Goal1; Goals)) :- 
     (encontra_cortes((Goal1, Goals), GoalsEsq, GoalsDir) -> (mi7(GoalsEsq), !; mi7(GoalsDir))
     ;   (mi7(Goal1); mi7(Goals))).
 
