@@ -27,3 +27,13 @@ encontra_cortes((!, Elementos), !, Elementos) :- !.
 encontra_cortes((E, !), E, !) :- !.
 encontra_cortes((E1, Elementos), (E1, TuplaEsq), TuplaDir) :-
     encontra_cortes(Elementos, TuplaEsq, TuplaDir).
+
+encontra_cortes((E, (!; Elementos)), E, Elementos) :- \=(E, (_, _)), !.
+encontra_cortes((!; Elementos), !, Elementos) :- !.
+encontra_cortes((E; !), E, !) :- !.
+encontra_cortes((E1s, !; Elementos), E1s, Elementos) :- !.
+encontra_cortes((E1; Elementos), (E1; TuplaEsq), TuplaDir) :-
+    encontra_cortes(Elementos, TuplaEsq, TuplaDir).
+encontra_cortes((T1; T2), TuplaEsq, (T3;T2)) :-  % , misturado com ;
+    encontra_cortes(T1, TuplaEsq, T3).
+
