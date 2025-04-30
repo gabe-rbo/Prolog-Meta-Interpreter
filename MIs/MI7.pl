@@ -7,7 +7,7 @@ mi7(Goal) :-
     \=(Goal, (_, _)),
     (built_in(Goal) -> call(Goal)
     ;   clause(Goal, Body),
-        (encontra_cortes(Body, BodyEsq, BodyDir) -> mi7(BodyEsq), !, mi7(BodyDir) % Cortamos a raiz.
+        (encontra_cortes(Body, BodyEsq, BodyDir) -> mi7(BodyEsq), !, mi7(BodyDir)
         ;   mi7(Body))).
 
 mi7((Goal1, Goals)) :- 
