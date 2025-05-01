@@ -1,4 +1,5 @@
 % Igual a MI7, mas este gera a árvore de prova.
+% Tem que ser atualizado com o MI9
 
 mi8(Goal) :- mi8(Goal, Prova), nl, abrir(Prova), nl.
 
