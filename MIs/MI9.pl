@@ -21,9 +21,9 @@ mi9((Goals1, Goals2)) :- % E's de tuplas
      ;=(FTras1, ';'), =(FFront1, ',') -> (mi9(Goals1Esq); !, mi9(Goals1Dir))
      ;=(FTras1, ','), =(FFront1, ';') -> (mi9(Goals1Esq), !; mi9(Goals1Dir))
      ;=(FTras1, ''), =(FFront1, ',') -> (!, mi9(Goals1Dir))
-     ;=(FTras1, ''), =(FFront1, ';') -> !, (!; mi9(Goals1Dir))
+     ;=(FTras1, ''), =(FFront1, ';') -> (!; mi9(Goals1Dir))
      ;=(FTras1, ','), =(FFront1, '') -> (mi9(Goals1Esq), !)
-     ;=(FTras1, ';'), =(FFront1, '') -> (mi9(Goals1Esq); !), !
+     ;=(FTras1, ';'), =(FFront1, '') -> (mi9(Goals1Esq); !)
      ;  mi9(Goals1Esq), !, mi9(Goals1Dir))
     ; mi9(Goals1)),
     (encontra_cortes(Goals2, Goals2Esq, Goals2Dir, FTras2, FFront2) ->
@@ -31,9 +31,9 @@ mi9((Goals1, Goals2)) :- % E's de tuplas
      ;=(FTras2, ';'), =(FFront2, ',') -> (mi9(Goals2Esq); !, mi9(Goals2Dir))
      ;=(FTras2, ','), =(FFront2, ';') -> (mi9(Goals2Esq), !; mi9(Goals2Dir))
      ;=(FTras2, ''), =(FFront2, ',') -> (!, mi9(Goals2Dir))
-     ;=(FTras2, ''), =(FFront2, ';') -> !, (!; mi9(Goals2Dir))
+     ;=(FTras2, ''), =(FFront2, ';') -> (!; mi9(Goals2Dir))
      ;=(FTras2, ','), =(FFront2, '') -> (mi9(Goals2Esq), !)
-     ;=(FTras2, ';'), =(FFront2, '') -> (mi9(Goals2Esq); !), !
+     ;=(FTras2, ';'), =(FFront2, '') -> (mi9(Goals2Esq); !)
      ;  mi9(Goals2Esq), !, mi9(Goals2Dir))
     ; mi9(Goals2)). 
 
