@@ -84,7 +84,7 @@ encontra_cortes((E; !, Elementos), E, Elementos, ';,') :- !.
 encontra_cortes((A -> !), A, !, ',E') :- !. % A -> B == A, B.
 encontra_cortes((A -> B ; !), (A, B), !, ';E') :- B \= !, !. % A -> B ; ! == (A, B) ; !.
 encontra_cortes((A -> ! ; C), A, C, ',;') :- !. % A , ! ; C == (A, !) ; C.
-encontra_cortes((A -> ! ; !), A, !, ';E') :- !. % (A , !) ; ! == (A ; !), (! ; !) == A ; !.
+encontra_cortes((A -> ! ; !), A, !, ',E') :- !. % (A , !) ; ! == (A ; !), (! ; !) == A , !.
 
 encontra_cortes((A -> B), (A, TEsq), TDir, F) :- !,
     encontra_cortes(B, TEsq, TDir, F).
