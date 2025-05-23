@@ -73,8 +73,8 @@ mi((A; B)) :-
 % ===================== Predicados Auxiliares =====================
 encontra_cortes((!, Elementos), !, Elementos, 'E,') :- !. % Empty ,
 encontra_cortes((!; Elementos), !, Elementos, 'E;') :- !.
-encontra_cortes((Elementos, !), Elementos, !, ',E') :- !.
-encontra_cortes((Elementos; !), Elementos, !, ';E') :- !.
+encontra_cortes((Elementos, !), Elementos, !, ',E') :- Elementos \= (_ -> _), !.
+encontra_cortes((Elementos; !), Elementos, !, ';E') :- Elementos \= (_ -> _), !.
 
 encontra_cortes((E, !, Elementos), E, Elementos, ',,') :- !.
 encontra_cortes((E, !; Elementos), E, Elementos, ',;') :- !.
