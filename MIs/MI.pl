@@ -74,7 +74,7 @@ mi((A; B)) :-
 encontra_cortes((!, Elementos), !, Elementos, 'E,') :- !. % Empty ,
 encontra_cortes((!; Elementos), !, Elementos, 'E;') :- !.
 encontra_cortes((Elementos, !), Elementos, !, ',E') :- Elementos \= (_ -> _), !.
-encontra_cortes((Elementos; !), Elementos, !, ';E') :- Elementos \= (_ -> _), !.
+encontra_cortes((Elementos; !), Elementos, !, ';E') :- !.
 
 encontra_cortes((E, !, Elementos), E, Elementos, ',,') :- !.
 encontra_cortes((E, !; Elementos), E, Elementos, ',;') :- !.
@@ -88,9 +88,6 @@ encontra_cortes((A -> ! ; !), A, !, ',E') :- !. % (A , !) ; ! == (A ; !), (! ; !
 
 encontra_cortes((A -> B), (A, TEsq), TDir, F) :- !,
     encontra_cortes(B, TEsq, TDir, F).
-
-encontra_cortes((A -> B ; C), (A, TEsq), TDir, F) :- !,
-    encontra_cortes((B ; C), TEsq, TDir, F).
 
 encontra_cortes(((A; B) ; C), TEsq, TDir, F) :- !,
     encontra_cortes((A ; (B ; C)), TEsq, TDir, F).
