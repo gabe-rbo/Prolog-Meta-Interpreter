@@ -4,7 +4,7 @@ mi(fail) :- !, fail.
 
 
 mi(Goal) :-
-    ((Goal \= (_, _), Goal \= (_; _)) ; (Goal = (_ -> _); (Goal = (_ -> _ ; _)))),, !,
+    ((Goal \= (_, _), Goal \= (_; _)) ; (Goal = (_ -> _); (Goal = (_ -> _ ; _)))), !,
     (predicate_property(Goal, built_in) -> call(Goal)
     ;   clause(Goal, Body),
         (   encontra_cortes(Body, TEsq, TDir, F) -> (
