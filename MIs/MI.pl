@@ -21,9 +21,3 @@ mi((A -> B), ChoicePoint) :-
     mi(A), !, mi(B, ChoicePoint).
 
 mi(Goal) :- !, prolog_current_choice(ChoicePoint), mi(Goal, ChoicePoint).
-
-
-
-
-
-
