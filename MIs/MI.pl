@@ -22,5 +22,3 @@ mi((A; B), ChoicePoint) :-
 mi((A -> B), ChoicePoint) :-
     mi(A), !, mi(B, ChoicePoint).
 
-
-
