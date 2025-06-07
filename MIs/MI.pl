@@ -2,7 +2,7 @@ mi(Goal) :- prolog_current_choice(ChoicePoint), mi(Goal, ChoicePoint).
 
 mi(true, _) :- !.
 
-mi(!, ChoicePoint) :- !, prolog_cut_to(ChoicePoint).
+mi(!, ChoicePoint) :- prolog_cut_to(ChoicePoint).
 
 mi(Goal, _) :-
     Goal \= (_, _), Goal\= (_; _), Goal \= (_ -> _), Goal \= !,
