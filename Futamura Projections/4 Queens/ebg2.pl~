@@ -1,5 +1,0 @@
-/*
-?- numlist(1, 4, Queens), Goal1 = n_queens(Queens, Sol), GenGoal1 = n_queens(GenQ, GenS), Goal2 = ebg(Goal1, GenGoal1, NewRule1), GenGoal2 = ebg(G, GG, NR), time(ebg(Goal2, GenGoal2, NewRule2)), !.
-% 38,450 inferences, 0.016 CPU in 0.006 seconds (242% CPU, 2460800 Lips)
-*/
-*
