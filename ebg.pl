@@ -11,11 +11,11 @@ ebg(Goal, GenGoal, GenGoal, _ChoicePoint) :-
     operational(GenGoal), !, call(Goal).
 
 ebg(Goal, GenGoal, GenGoal, _ChoicePoint) :-
-    Goal \= (_, _), Goal \= (_; _), Goal \= (_ -> _),
+    not(operational(Goal)), Goal \= (_, _), Goal \= (_; _), Goal \= (_ -> _),
     predicate_property(Goal, built_in), !, call(Goal).
 
 ebg(Goal, GenGoal, NewRule, _ChoicePoint) :-
-    Goal \= (_, _), Goal \= (_; _), Goal \= (_ -> _),
+    not(operational(Goal)), not(predicate_property(Goal, built_in)),
     prolog_current_choice(ChoicePoint),
     clause(GenGoal, GenBody),
     copy_term((GenGoal :- GenBody), (Goal :- Body)),
