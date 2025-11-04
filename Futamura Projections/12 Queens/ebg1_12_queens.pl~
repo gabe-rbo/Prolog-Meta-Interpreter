@@ -7,6 +7,7 @@
 Queens = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 Sol = [1, 3, 5, 8, 10, 12, 6, 11, 2, 7, 9, 4].
 
+
 ?- numlist(1, 12, Queens), time(n_queens(Queens, Sol)), !.
 % 114,618,178 inferences, 6.266 CPU in 6.267 seconds (100% CPU, 18293176 Lips)
 Queens = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
